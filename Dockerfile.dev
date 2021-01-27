@@ -1,0 +1,13 @@
+FROM elixir:1.9
+
+WORKDIR /opt/poke_apix
+
+COPY .  /opt/poke_apix
+
+RUN apt update
+
+RUN apt install inotify-tools -y
+
+RUN mix local.rebar --force && mix local.hex --force
+
+RUN mix deps.get

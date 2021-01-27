@@ -1,0 +1,23 @@
+version: "3.3"
+
+services:
+  database:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+    stdin_open: true
+    tty: true
+    network_mode: "host"
+
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    working_dir: /opt/poke_apix
+    command: "iex -S mix phx.server"
+    volumes:
+      - .:/opt/poke_apix
+    stdin_open: true
+    tty: true
+    network_mode: "host"
